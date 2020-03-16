@@ -31,6 +31,7 @@ namespace IdentityExample
                 config.Password.RequireDigit = false;
                 config.Password.RequireNonAlphanumeric = false;
                 config.Password.RequireUppercase = false;
+                config.SignIn.RequireConfirmedEmail = true;
             })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
@@ -39,6 +40,11 @@ namespace IdentityExample
             {
                 config.Cookie.Name = "Identity.Cookie";
                 config.LoginPath = "/Home/Login";
+            });
+
+            services.AddMailKit(config =>
+            {
+                config.UseMailKit();
             });
             services.AddControllersWithViews();
         }

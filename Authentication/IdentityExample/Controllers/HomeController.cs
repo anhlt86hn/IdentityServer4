@@ -82,9 +82,22 @@ namespace IdentityExample.Controllers
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
-                // sign in here
+                // generation of the email token
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                var link = Url.Action(nameof(VerifyEmail), "Home", new { userId = user.Id, code =  });
+                return RedirectToAction("EmailVerification");
             }
+
             return RedirectToAction("Index");
-        }      
+        }
+
+        public async Task<IActionResult> VerifyEmail(string userId, string code)
+        {
+
+            return View();
+        }
+
+        public IActionResult EmailVerification() => View();
     }
 }
