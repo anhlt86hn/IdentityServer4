@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NETCore.MailKit.Core;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,12 +17,15 @@ namespace IdentityExample.Controllers
     {
         private UserManager<IdentityUser> _userManager;
         private SignInManager<IdentityUser> _signInManager;
+        private IEmailService _emailService;
         public HomeController(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            IEmailService emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailService = emailService;
         }
 
         // GET: /<controller>/
@@ -85,7 +89,11 @@ namespace IdentityExample.Controllers
                 // generation of the email token
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                var link = Url.Action(nameof(VerifyEmail), "Home", new { userId = user.Id, code =  });
+                var link = Url.Action(nameof(VerifyEmail), "Home", new { userId = user.Id, code }, Request.Scheme, Request.Host.ToString());
+
+                await _emailService.SendAsync("Testo@testo.com", "email verify",
+                    $"<a href=\"{link}\">Verify Email</a>", true);
+
                 return RedirectToAction("EmailVerification");
             }
 
@@ -94,8 +102,14 @@ namespace IdentityExample.Controllers
 
         public async Task<IActionResult> VerifyEmail(string userId, string code)
         {
-
-            return View();
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return BadRequest();
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            if (result.Succeeded)
+            {
+                return View();
+            }
+            return BadRequest();
         }
 
         public IActionResult EmailVerification() => View();
