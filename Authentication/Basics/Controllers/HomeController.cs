@@ -25,26 +25,42 @@ namespace Basics.Controllers
             return View();
         }
 
+        [Authorize(Policy = "Claim.DoB")]
+        public IActionResult SecretPolicy()
+        {
+            return View("Secret");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult SecretRole()
+        {
+            return View("Secret");
+        }
+
         public IActionResult Authenticate()
         {
             var grandmaClaims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name, "Bob"),
                 new Claim(ClaimTypes.Email, "Bob@gmail.com"),
+                new Claim(ClaimTypes.DateOfBirth, "11-10-2000"),
+                new Claim(ClaimTypes.Role, "Admin"),
                 new Claim("Grandma.Says", "Very nice boi.")
             };
 
             var licenseClaims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name, "Bob K Foo"),
-                new Claim("DrivingLicense", "A+")
+                new Claim("DrivingLicense", "A+"),
             };
 
             var grandmaIdentity = new ClaimsIdentity(grandmaClaims, "Grandma Identity");
             var licenseIdentity = new ClaimsIdentity(licenseClaims, "Government");
 
             var userPrincipal = new ClaimsPrincipal(new[] { grandmaIdentity, licenseIdentity });
+
             HttpContext.SignInAsync(userPrincipal);
+
             return RedirectToAction("Index");
         }
     }
