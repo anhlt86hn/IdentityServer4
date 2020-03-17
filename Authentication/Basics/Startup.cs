@@ -76,8 +76,17 @@ namespace Basics
                 .Build();
 
                 // global authorization filter
-                // config.Filters.Add(new AuthorizeFilter());
+                // config.Filters.Add(new AuthorizeFilter(defaultAuthPolicy));
             });
+
+            services.AddRazorPages()
+                .AddRazorPagesOptions(config =>
+                {
+                    config.Conventions.AuthorizePage("/Razor/Secured");
+                    config.Conventions.AuthorizePage("/Razor/Policy", "Admin");
+                    config.Conventions.AuthorizePage("/RazorSecured");
+                    config.Conventions.AuthorizePage("/RazorSecured/Anon");
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,6 +108,7 @@ namespace Basics
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
             });
         }
     }
