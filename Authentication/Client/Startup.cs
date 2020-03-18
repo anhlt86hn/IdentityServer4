@@ -25,7 +25,7 @@ namespace Client
                 // when we sign in we will deal out a cookie
                 config.DefaultSignInScheme = "ClientCookie";
                 // use this to check if we are allowed to do something.
-                config.DefaultChallengeScheme = "OutServer";
+                config.DefaultChallengeScheme = "OurServer";
             })
                 .AddCookie("ClientCookie")
                 .AddOAuth("OurServer", config =>
@@ -57,7 +57,8 @@ namespace Client
                     };
                 });
 
-            services.AddControllersWithViews().AddRazorRuntime();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
         }
 
        

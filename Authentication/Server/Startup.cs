@@ -38,11 +38,12 @@ namespace Server
                 config.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidIssuer = Constants.Issuer,
-                    ValidAudience = Constants.Audiance,
+                    ValidAudience = Constants.Audience,
                     IssuerSigningKey = key,
                 };
             });              
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
         }
 
         
