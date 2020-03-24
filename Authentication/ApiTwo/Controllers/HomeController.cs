@@ -22,7 +22,7 @@ namespace ApiTwo.Controllers
         {
             // retrieve access token
             var serverClient = _httpClientFactory.CreateClient();
-            var discoveryDocument = await serverClient.GetDiscoveryDocumentAsync("https://localhost:44343/");
+            var discoveryDocument = await serverClient.GetDiscoveryDocumentAsync("https://localhost:44343/"); // IdentityServer
 
             var tokenResponse = await serverClient.RequestClientCredentialsTokenAsync(
                 new ClientCredentialsTokenRequest
@@ -37,7 +37,7 @@ namespace ApiTwo.Controllers
             var apiClient = _httpClientFactory.CreateClient();
             apiClient.SetBearerToken(tokenResponse.AccessToken);
 
-            var response = await apiClient.GetAsync("https://localhost:44345/secret");
+            var response = await apiClient.GetAsync("https://localhost:44314/secret"); // ApiOne
 
             var content = await response.Content.ReadAsStringAsync();
 

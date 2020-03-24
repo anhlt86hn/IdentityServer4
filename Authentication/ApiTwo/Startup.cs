@@ -17,7 +17,7 @@ namespace ApiTwo
         {
             services.AddAuthentication()
                 .AddJwtBearer("Bearer", config => {
-                    config.Authority = "https://localhost:44343/";
+                    config.Authority = "https://localhost:44343/"; // IdentityServer
                     config.Audience = "ApiTwo";
                 });
 

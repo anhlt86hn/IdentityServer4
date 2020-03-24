@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IdentityServer
 {
-    public class Configuration
+    public static class Configuration
     {
         public static IEnumerable<IdentityResource> GetIdentityResources() =>
             new List<IdentityResource>
