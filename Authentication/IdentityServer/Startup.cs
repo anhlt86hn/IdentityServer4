@@ -49,7 +49,7 @@ namespace IdentityServer
                 .AddInMemoryIdentityResources(Configuration.GetIdentityResources())
                 .AddInMemoryClients(Configuration.GetClients())
                 .AddDeveloperSigningCredential();
-
+           
             services.AddControllersWithViews();
         }
      
