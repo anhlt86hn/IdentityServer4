@@ -44,6 +44,7 @@ namespace MvcClient
                     // configure scope
                     config.Scope.Clear();
                     config.Scope.Add("openid");
+                    config.Scope.Add("rc.scope");
                     config.Scope.Add("ApiOne");
                     config.Scope.Add("ApiTwo");
                 });
