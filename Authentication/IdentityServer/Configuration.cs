@@ -55,7 +55,9 @@ namespace IdentityServer
                     "rc.scope"
                     },
 
-                    AlwaysIncludeUserClaimsInIdToken = true,
+                    // put all the claims in this id token
+                    // AlwaysIncludeUserClaimsInIdToken = true,
+                    AllowOfflineAccess = true,
                     RequireConsent = false,
                 }
             };
