@@ -1,4 +1,5 @@
 ﻿using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Models;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,19 @@ namespace IdentityServer
                     // AlwaysIncludeUserClaimsInIdToken = true,
                     AllowOfflineAccess = true,
                     RequireConsent = false,
+                },
+                new Client
+                {
+                    ClientId = "client_id_js",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    RedirectUris = {
+                        "https://localhost:44386/signin"
+                    },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        "ApiOne"
+                    }
                 }
             };
     }

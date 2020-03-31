@@ -54,7 +54,7 @@ namespace MvcClient.Controllers
         private async Task RefreshAccessToken()
         {
             var serverClient = _httpClientFactory.CreateClient();
-            var discoveryDocument = await serverClient.GetDiscoveryDocumentAsync("https://localhost:44343/");
+            var discoveryDocument = await serverClient.GetDiscoveryDocumentAsync("https://localhost:44343/"); // IdentityServer
 
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             var idToken = await HttpContext.GetTokenAsync("id_token");
