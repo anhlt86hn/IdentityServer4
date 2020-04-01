@@ -1,4 +1,4 @@
-﻿var createSession = function () {
+﻿var createState = function () {
     return "SessionValueMakeItBitLongerasdhasdhjasdsskkkkkkkkkkkkkkwuwuew";
 }
 
@@ -7,18 +7,17 @@ var createNonce = function () {
 }
 
 var signIn = function () {
-    var redirectUri = "https://localhost/SignIn";
-    var responseType = "id_token_token";
+    var redirectUri = "https://localhost:44386/SignIn"; // JavascriptClient
+    var responseType = "id_token token";
     var scope = "openid ApiOne"; 
-    var authUrl = `/connect/authorize/callback
-?client_id=client_id_js
-?redirect_uri=${encodeURIComponent(redirectUri)}
-?response_type=${encodeURIComponent(responseType)}
-?scope = ${encodeURIComponent(scope)}
-?nonce=${createNonce()}
-?state=${createState()}
-`;
+    var authUrl = "/connect/authorize/callback" +
+"?client_id=client_id_js" +
+"&redirect_uri=" + encodeURIComponent(redirectUri) +
+"&response_type=" + encodeURIComponent(responseType) +
+"&scope = " + encodeURIComponent(scope) +
+"&nonce=" + createNonce() +
+"&state=" + createState();
     var returnUrl = encodeURIComponent(authUrl);
     window.location.href =
-        "https://localhost:44343/Auth/Login?ReturnUrl=" + returnUrl;
+        "https://localhost:44343/Auth/Login?ReturnUrl=" + returnUrl; // IdentityServer
 }

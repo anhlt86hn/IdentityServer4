@@ -66,13 +66,15 @@ namespace IdentityServer
                     ClientId = "client_id_js",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     RedirectUris = {
-                        "https://localhost:44386/signin"
+                        "https://localhost:44386/SignIn" // JavascriptClient
                     },
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         "ApiOne"
-                    }
+                    },
+                    AllowAccessTokensViaBrowser = true,
+                    RequireConsent = false,
                 }
             };
     }

@@ -13,5 +13,10 @@ namespace JavascriptClient.Controllers
         {
             return View();
         }
+
+        public IActionResult SignIn()
+        {
+            return View();
+        }
     }
 }
