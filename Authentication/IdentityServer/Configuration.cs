@@ -66,7 +66,7 @@ namespace IdentityServer
                     ClientId = "client_id_js",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     RedirectUris = {
-                        "https://localhost:44386/SignIn" // JavascriptClient
+                        "https://localhost:44386/Home/SignIn" // JavascriptClient
                     },
                     AllowedScopes =
                     {

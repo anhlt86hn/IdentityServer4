@@ -7,7 +7,7 @@ var createNonce = function () {
 };
 
 var signIn = function () {
-    var redirectUri = "https://localhost:44386/SignIn"; // JavascriptClient
+    var redirectUri = "https://localhost:44386/Home/SignIn"; // JavascriptClient
     var responseType = "id_token token";
     var scope = "openid ApiOne"; 
     var authUrl = "/connect/authorize/callback" +
