@@ -1,5 +1,4 @@
-﻿var callBackUrl = "";
-
+﻿// var callBackUrl = "";
 var extractTokens = function (address) {
     var returnValue = address.split('#')[1];
     var values = returnValue.split('&');
@@ -10,7 +9,7 @@ var extractTokens = function (address) {
         localStorage.setItem(kvPair[0], kvPair[1]);
     }   
 
-    window.location.href = "/home/index";
+    window.location.href = '/home/index';
 }
 
 extractTokens(window.location.href);

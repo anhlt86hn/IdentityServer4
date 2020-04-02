@@ -1,10 +1,10 @@
 ﻿var createState = function () {
     return "SessionValueMakeItBitLongerasdhasdhjasdsskkkkkkkkkkkkkkwuwuew";
-}
+};
 
 var createNonce = function () {
     return "NonceValuesasduereu3434n65vudda";
-}
+};
 
 var signIn = function () {
     var redirectUri = "https://localhost:44386/SignIn"; // JavascriptClient
